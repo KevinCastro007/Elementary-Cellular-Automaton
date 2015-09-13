@@ -36,20 +36,14 @@ package Bitmap_Store is
 	Last_Pixel 	: PIXEL_POINTER;
 	Temp_Pixel 	: PIXEL_POINTER;
 
-	procedure Fill(Picture : in out IMAGE; Color : PIXEL);
-
-	procedure Print(Picture : IMAGE);
-	
 	procedure Generate_Image(N : in INTEGER);
 
-	function Generate_Pixel return PIXEL;
-
-	procedure Reset_Image;
-	
 	procedure Get_Pixel(Width : in INTEGER; I : in INTEGER; J : in INTEGER; Color : out PIXEL);
 	
 	procedure Set_Pixel(Width : in INTEGER; I : in INTEGER; J : in INTEGER; Color : in PIXEL);
 	
-	procedure Put_PPM(File_Name : in STRING; Height : in INTEGER; Width : in INTEGER);	
+	procedure Export_PPM(Height : in INTEGER; Width : in INTEGER);	
+
+	function Generate_Pixel return PIXEL;
 
 end Bitmap_Store;

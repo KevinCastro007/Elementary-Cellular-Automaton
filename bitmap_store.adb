@@ -1,28 +1,5 @@
 
 package body Bitmap_Store is
- 
-	procedure Fill(Picture : in out IMAGE; Color : PIXEL) is
-	begin
-		for I in Picture'range (1) loop
-			for J in Picture'range (2) loop
-				Picture(I, J) := Color;
-			end loop;
-		end loop;
-	end Fill;
- 
-	procedure Print(Picture : IMAGE) is
-	begin
-		for I in Picture'range (1) loop
-			for J in Picture'range (2) loop
-				if Picture(I, J) = WHITE then
-				   Put('1');
-				else
-				   Put('0');
-				end if;
-			end loop;
-			New_Line;
-		end loop; 
-	end Print;
 	
 	procedure Generate_Image(N : in INTEGER) is	
 	begin
@@ -47,18 +24,7 @@ package body Bitmap_Store is
 		Reset(CG);
 		My_Pixel := (R => LUMINANCE(Random(CG)), G => LUMINANCE(Random(CG)), B => LUMINANCE(Random(CG)));
 		return My_Pixel;		
-	end;
-
-
-	procedure Reset_Image is	
-	begin
-		Temp_Pixel := First_Pixel;
-		Temp_Pixel := Temp_Pixel.Next;
-		while Temp_Pixel /= null loop
-			Temp_Pixel.Color := BLACK;
-			Temp_Pixel       := Temp_Pixel.Next;
-		end loop;		
-	end Reset_Image;		
+	end;	
 	
 	procedure Get_Pixel(Width : in INTEGER; I : in INTEGER; J : in INTEGER; Color : out PIXEL) is
 	
@@ -90,7 +56,7 @@ package body Bitmap_Store is
 		 Temp_Pixel.Color := Color;
 	end;	
  
-	procedure Put_PPM(File_Name : in STRING; Height : in INTEGER; Width : in INTEGER) is
+	procedure Export_PPM(Height : in INTEGER; Width : in INTEGER) is
 
 		SIZE   	  : constant STRING := Integer'IMAGE(Width) & Integer'IMAGE(Height);
 		Buffer 	  : STRING(1..Width * 3);
@@ -99,7 +65,7 @@ package body Bitmap_Store is
 		File 	  : FILE_TYPE;	 
 
 	begin	
-		Create(File, Out_File, File_Name);
+		Create(File, Out_File, "Output.ppm");
 		STRING'Write(Stream(File), "P6" & LF);
 		STRING'Write(Stream(File), SIZE(2..SIZE'LAST) & LF);
 		STRING'Write(Stream(File), "255" & LF);
@@ -116,5 +82,5 @@ package body Bitmap_Store is
 		end loop;
 		CHARACTER'Write(Stream(File), LF);
 		Close(File);		
-	end Put_PPM;    
+	end Export_PPM;    
 end Bitmap_Store;

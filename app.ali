@@ -1,6 +1,6 @@
 V "GNAT Lib v5"
 M P W=b
-P SS ZX
+P ZX
 
 RN
 RV NO_ALLOCATORS
@@ -14,20 +14,15 @@ RV NO_STANDARD_STORAGE_POOLS
 RV NO_DEFAULT_INITIALIZATION
 RV SPARK_05
 
-U app%b			app.adb			cb642ecb NE OO SU
+U app%b			app.adb			6866f77d NE OO SU
 W ada%s			ada.ads			ada.ali
 W ada.exceptions%s	a-except.adb		a-except.ali
 W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
-W ada.numerics%s	a-numeri.ads		a-numeri.ali
-W ada.numerics.discrete_random%s
-W ada.strings%s		a-string.ads		a-string.ali
-W ada.strings.unbounded%s  a-strunb.adb		a-strunb.ali
 W ada.tags%s		a-tags.adb		a-tags.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
 Z ada.text_io.modular_aux%s  a-timoau.adb	a-timoau.ali
 W ada.text_io.modular_io%s
 W bitmap_store%s	bitmap_store.adb	bitmap_store.ali
-W files%s		files.ads		files.ali
 W my_types%s		my_types.adb		my_types.ali
 Z system%s		system.ads		system.ali
 Z system.unsigned_types%s  s-unstyp.ads		s-unstyp.ali
@@ -36,16 +31,11 @@ D ada.ads		20070406091342 3ffc8e18 ada%s
 D a-charac.ads		20070912115821 2d3ec45b ada.characters%s
 D a-chlat1.ads		20140225151544 66457d31 ada.characters.latin_1%s
 D a-except.ads		20140730140058 5250cb69 ada.exceptions%s
-D a-finali.ads		20140611123707 69f99942 ada.finalization%s
 D a-inteio.ads		20070406091342 f64b89a4 ada.integer_text_io%s
 D a-ioexce.ads		20140225151544 e4a01f64 ada.io_exceptions%s
 D a-numeri.ads		20080324174807 bb51c45a ada.numerics%s
 D a-nudira.ads		20100622172941 2fef2912 ada.numerics.discrete_random%s
-D a-nudira.adb		20100622172941 e57ce22b ada.numerics.discrete_random%b
 D a-stream.ads		20141120112812 119b8fb3 ada.streams%s
-D a-string.ads		20070406091342 90ac6797 ada.strings%s
-D a-strmap.ads		20140611123156 e8bb714a ada.strings.maps%s
-D a-strunb.ads		20140717072738 3f91d4c5 ada.strings.unbounded%s
 D a-tags.ads		20140730140058 dc4d0634 ada.tags%s
 D a-textio.ads		20140717063745 386df5d4 ada.text_io%s
 D a-tiinio.ads		20140717063513 aa04e5d6 ada.text_io.integer_io%s
@@ -54,123 +44,96 @@ D a-timoio.ads		20140717063513 d32407b9 ada.text_io.modular_io%s
 D a-timoio.adb		20090409150019 de0ea1c6 ada.text_io.modular_io%b
 D a-titest.ads		20070406091342 f6e9e057 ada.text_io.text_streams%s
 D a-unccon.ads		20070406091342 f9eb8f06 ada.unchecked_conversion%s
-D app.adb		20150912210309 62406057 app%b
-D bitmap_store.ads	20150911004756 8bf881d3 bitmap_store%s
-D files.ads		20150910135308 c3c2c8ba files%s
+D app.adb		20150913222907 b6920300 app%b
+D bitmap_store.ads	20150913222913 2f940e5f bitmap_store%s
 D interfac.ads		20141120112812 6033a23f interfaces%s
 D i-cstrea.ads		20140801100435 e53d8b8e interfaces.c_streams%s
-D my_types.ads		20150908221756 3f468652 my_types%s
+D my_types.ads		20150913220857 3f468652 my_types%s
 D system.ads		20141031112219 1d274481 system%s
-D s-atocou.ads		20141017084241 cd7c94ca system.atomic_counters%s
 D s-crtl.ads		20141120112812 0ebbdb71 system.crtl%s
 D s-exctab.ads		20140225151139 54135002 system.exception_table%s
 D s-ficobl.ads		20140718105747 078245e4 system.file_control_block%s
-D s-finmas.ads		20140225151139 814daec4 system.finalization_masters%s
-D s-finroo.ads		20120426095924 4ff27390 system.finalization_root%s
 D s-parame.ads		20140801093848 7e2a0d7f system.parameters%s
 D s-rannum.ads		20150205111725 99ade2f2 system.random_numbers%s
-D s-secsta.ads		20140225151139 86a2856d system.secondary_stack%s
 D s-soflin.ads		20140801100131 aa763b52 system.soft_links%s
 D s-stache.ads		20140225151139 a37c21ec system.stack_checking%s
 D s-stalib.ads		20150220094550 fa0a3617 system.standard_library%s
 D s-stoele.ads		20140225151139 2dc34a04 system.storage_elements%s
-D s-stopoo.ads		20131010103753 b16154c2 system.storage_pools%s
-D s-stposu.ads		20140718101241 97a6219c system.storage_pools.subpools%s
-D s-stratt.ads		20131014135145 aedef97e system.stream_attributes%s
 D s-traent.ads		20140730135025 005bf670 system.traceback_entries%s
 D s-unstyp.ads		20140731130224 9d58a4c0 system.unsigned_types%s
 D s-wchcon.ads		20140718092328 1b7d22d2 system.wch_con%s
 X 1 ada.ads
-16K9*Ada 19e8 23|2r6 2r19 2r42 2r63 3r5 3r18 3r41 15r27
-X 6 a-inteio.ads
-18K13*Integer_Text_IO[17|46] 23|2w46 3r45
-X 8 a-numeri.ads
-16K13*Numerics 32e17 23|2r67
-X 9 a-nudira.ads
-44k22*Discrete_Random 73e33 23|2w76
-X 12 a-string.ads
-16K13*Strings 35e16 23|2r23 3r22
-X 14 a-strunb.ads
-76K21*Unbounded 489e26 23|2w31 3r30
-X 16 a-textio.ads
-49K13*Text_IO 471e16 23|2w10 3r9 15r31
-240U14*Get 23|162s5
-242U14*Put 23|149s5 155s5 161s5 187s22 189s22
-263U14*Put_Line 23|151s9 157s9 176s13 186s24 188s30
-298X4*Data_Error 23|186r10
-X 17 a-tiinio.ads
-56U14*Get 23|149s22[6|18] 155s22[6|18]
-X 19 a-timoio.ads
-46k21*Modular_IO 85e27 23|15r39
-X 23 app.adb
-6U11*App 6b11 190l5 190t8
-8U15 Create_Configuration 38b15 52l9 52t29 167s5
-9U15 Set_Configuration 55b15 62l9 62t26 169s5
-10V14 Pattern_Result{28|4M10} 65b14 72l9 72t23 138s38
-11U15 Initialize_Sequence 11>35 75b15 95l9 95t28 166s5
-11i35 N{integer} 75b35 77r22 79r21
-12U15 Update_Sequence 12>31 12>47 12>73 113b15 145l9 145t24 174s13 181s13
-12i31 I{integer} 113b31 141r56
-12i47 Image_Width{integer} 113b47 120r22 141r43
-12r73 Color{24|11R14} 113b73 141r62
-15K13 Bit_IO[19|46] 16r9
-18i5 T{integer} 149m26 150r8 163r21 164r24
-19i5 N{integer} 155m26 156r8 156r17 168r15
-20a5 N_Byte{28|6A10} 59r33 168m18
-21a5 N_Triad{28|5A10} 42m37 43r35 68r37 134m17 135m17 136m17
-24p5 First_Pattern{28|8P10} 44r16 45m17 57r25 67r25 123r20 127r24 129r27
-25p5 Last_Pattern{28|8P10} 46m17 48r17 49m17 123r46 126r20
-26p5 Temp_Pattern{28|8P10} 41m13 43r13 45r34 46r33 48r38 49r33 57m9 59r13
-. 60m13 60r33 67m9 68r15 69m13 69r29 71r16
-28p5 First_Automata{28|10P10} 86r16 87m17 100r26 118r26
-29p5 Last_Automata{28|10P10} 88m17 90r17 91r43 92m17
-30p5 Temp_Automata{28|10P10} 78m13 80r17 83r17 87r35 88r34 90r39 91r17 92r34
-. 100m9 103r17 106r17 108m13 108r30 118m9 119r23 122r16 122r49 124r21 124r46
-. 128r25 130r25 135r31 136r31 137r31 138r17 140r28 143m13 143r30
-32i5 Image_Height{integer} 163m5 165r20 172r18 173r20 175r32
-33i5 Image_Width{integer} 81r27 104r27 164m5 165r35 166r25 174r32 175r46
-. 178r28 181r32
-34a5 File_Name{string} 162m9 175r21
-35r5 Color{24|11R14} 170m5 174r45 181r45
-40i13 Pattern_Num{integer} 42r24
-58i13 Pattern_Num{integer} 59r40
-77i13 I{integer} 79r16 81r44
-97U15 Reset_Sequence 97b15 97>30 110l9 110t23 178s13
-97i30 N{integer} 101r22 102r21
-101i13 I{integer} 102r16 104r43
-115m9 Stored_Bit{28|4M10} 119m9 134r31 137m17
-120i13 J{integer} 141r59
-148L3 Get_T 152r14
-154L3 Get_N 158r14
-171l1 Main_Loop 179r18 183l14 183e23
-172i9 I{integer} 173r12 174r29 181r29
-X 24 bitmap_store.ads
-7K9*Bitmap_Store 23|2w103 3r72 24|55e17
-11R14*PIXEL 23|12r84 35r13 113r84 24|13e19
-28r9*WHITE{11R14} 23|81r52 104r50
-43U19*Generate_Image 23|165s5
-45V18*Generate_Pixel{11R14} 23|170s14
-47U19*Reset_Image 23|177s13
-51U19*Set_Pixel 23|81s17 104s17 141s33
-53U19*Put_PPM 23|175s13
-X 25 files.ads
-1K9*Files 23|2w117 3r86 25|40e10
-X 28 my_types.ads
-2K9*My_Types 23|2w93 3r62 28|34e13
-4M10*MY_BIT 23|10r36 15r50 65r36 115r22
-5A10*MY_TRIAD(4M10)<integer> 23|21r21
-6A10*MY_BYTE(4M10)<integer> 23|20r21
-7R10*PATTERN_REC 23|41r33 28|18e19
-8P10*PATTERN_POINTER(7R10) 23|24r21 25r21 26r21
-9R10*AUTOMATA_REC 23|78r34 28|26e19
-10P10*AUTOMATA_POINTER(9R10) 23|28r22 29r22 30r22
-15a13*Triad{5A10} 23|43m26 68r28
-16m13*Bit{4M10} 23|59m26 71r29 123r34 123r59 126r33 127r38 129r41
-17p13*Next{8P10} 23|48m30 60r46 69r42
-23m13*Bit{4M10} 23|80m31 83m31 103m31 106m31 119r37 124m35 124r60 128m39
-. 130m39 135r45 136r50 137r45 138m31 140r42
-24p13*Next{10P10} 23|90m31 108r44 122r63 136r45 143r44
-25p13*Previous{10P10} 23|91m31 122r30
-29U15*N_To_Byte 23|168s5
-32U15*N_to_Triad 23|42s13
+16K9*Ada 19e8 18|2r6 2r19 3r5 3r18 14r27
+X 5 a-inteio.ads
+18K13*Integer_Text_IO[12|46] 18|2w23 3r22
+X 11 a-textio.ads
+49K13*Text_IO 471e16 18|2w10 3r9 14r31
+242U14*Put 18|124s5 130s5 156s22
+263U14*Put_Line 18|126s9 132s9 147s13 155s24
+298X4*Data_Error 18|155r10
+X 12 a-tiinio.ads
+56U14*Get 18|124s22[5|18] 130s22[5|18]
+X 14 a-timoio.ads
+46k21*Modular_IO 85e27 18|14r39
+X 18 app.adb
+6U11*App 6b11 157l5 157t8
+8U15 Set_Configuration 36b15 52l9 52t26 140s5
+9U15 Initialize_Sequence 9>35 65b15 85l9 85t28 139s5
+9i35 N{integer} 65b35 67r22 69r21
+10U15 Update_Sequence 10>31 10>47 10>73 88b15 120l9 120t24 145s13 150s13
+10i31 I{integer} 88b31 116r56
+10i47 Image_Width{integer} 88b47 95r22 116r43
+10r73 Color{19|11R14} 88b73 116r62
+11V14 Pattern_Result{22|4M10} 55b14 62l9 62t23 113s38
+14K13 Bit_IO[14|46] 15r9
+17i5 T{integer} 124m26 125r8 136r21 137r24
+18i5 N{integer} 38r19 130m26 131r8 131r17
+19a5 N_Byte{22|6A10} 38m22 43r33
+20a5 N_Triad{22|5A10} 41m37 42r35 58r37 109m17 110m17 111m17
+23p5 First_Pattern{22|8P10} 44r16 45m17 57r25 98r20 102r24
+24p5 Last_Pattern{22|8P10} 46m17 48r17 49m17 98r46 101r20
+25p5 Temp_Pattern{22|8P10} 40m13 42r13 43r13 45r34 46r33 48r38 49r33 57m9
+. 58r15 59m13 59r29 61r16
+27p5 First_Automata{22|10P10} 76r16 77m17 93r26
+28p5 Last_Automata{22|10P10} 78m17 80r17 81r43 82m17
+29p5 Temp_Automata{22|10P10} 68m13 70r17 73r17 77r35 78r34 80r39 81r17 82r34
+. 93m9 94r23 97r16 97r49 99r21 99r46 103r25 105r25 110r31 111r31 112r31 113r17
+. 115r28 118m13 118r30
+31i5 Image_Height{integer} 136m5 138r20 143r18 144r20 146r24
+32i5 Image_Width{integer} 71r27 137m5 138r35 139r25 145r32 146r38 150r32
+33r5 Color{19|11R14} 141m5 145r45 150r45
+39i13 Pattern_Num{integer} 41r24 43r40
+67i13 I{integer} 69r16 71r43
+90m9 Stored_Bit{22|4M10} 94m9 109r31 112m17
+95i13 J{integer} 116r59
+123L3 Get_T 127r14
+129L3 Get_N 133r14
+142l1 Main_Loop 148r18 152l14 152e23
+143i9 I{integer} 144r12 145r29 150r29
+X 19 bitmap_store.ads
+7K9*Bitmap_Store 18|2w50 3r49 19|49e17
+11R14*PIXEL 18|10r84 33r13 88r84 19|13e19
+28r9*WHITE{11R14} 18|71r46
+39U19*Generate_Image 18|138s5
+43U19*Set_Pixel 18|71s17 116s33
+45U19*Export_PPM 18|146s13
+47V18*Generate_Pixel{11R14} 18|141s14
+X 22 my_types.ads
+2K9*My_Types 18|2w40 3r39 22|34e13
+4M10*MY_BIT 18|11r36 14r50 55r36 90r22
+5A10*MY_TRIAD(4M10)<integer> 18|20r21
+6A10*MY_BYTE(4M10)<integer> 18|19r21
+7R10*PATTERN_REC 18|40r33 22|18e19
+8P10*PATTERN_POINTER(7R10) 18|23r21 24r21 25r21
+9R10*AUTOMATA_REC 18|68r34 22|26e19
+10P10*AUTOMATA_POINTER(9R10) 18|27r22 28r22 29r22
+15a13*Triad{5A10} 18|42m26 58r28
+16m13*Bit{4M10} 18|43m26 61r29 98r34 98r59 101r33 102r38
+17p13*Next{8P10} 18|48m30 59r42
+23m13*Bit{4M10} 18|70m31 73m31 94r37 99m35 99r60 103m39 105m39 110r45 111r50
+. 112r45 113m31 115r42
+24p13*Next{10P10} 18|80m31 97r63 111r45 118r44
+25p13*Previous{10P10} 18|81m31 97r30
+29U15*N_To_Byte 18|38s9
+32U15*N_to_Triad 18|41s13
 

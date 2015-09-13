@@ -17,7 +17,7 @@ package My_Types is
             Next    : PATTERN_POINTER;
         end record;
 
-    -- One-dimensional Cellular Automatas.
+    -- One-dimensional Cellular Automaton.
     type AUTOMATA_REC is               
         record
             Bit      : MY_BIT;
