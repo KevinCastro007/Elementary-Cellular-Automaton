@@ -11,7 +11,7 @@ RV NO_DEFAULT_INITIALIZATION
 RV NO_ELABORATION_CODE
 RV SPARK_05
 
-U bitmap_store%b	bitmap_store.adb	fd804cfe NE OO PK
+U bitmap%b		bitmap.adb		72fbc8cb NE OO PK
 W ada.streams%s		a-stream.adb		a-stream.ali
 W ada.tags%s		a-tags.adb		a-tags.ali
 W interfaces%s		interfac.ads		interfac.ali
@@ -20,7 +20,7 @@ W system.img_int%s	s-imgint.adb		s-imgint.ali
 W system.stream_attributes%s  s-stratt.adb	s-stratt.ali
 W system.strings.stream_ops%s  s-ststop.adb	s-ststop.ali
 
-U bitmap_store%s	bitmap_store.ads	a8ba4fff EE OO PK
+U bitmap%s		bitmap.ads		8929a982 EE OO PK
 W ada%s			ada.ads			ada.ali
 W ada.characters%s	a-charac.ads		a-charac.ali
 W ada.characters.latin_1%s  a-chlat1.ads	a-chlat1.ali
@@ -46,8 +46,8 @@ D a-textio.ads		20140717063745 386df5d4 ada.text_io%s
 D a-titest.ads		20070406091342 f6e9e057 ada.text_io.text_streams%s
 D a-unccon.ads		20070406091342 f9eb8f06 ada.unchecked_conversion%s
 D a-uncdea.ads		20070406091342 f15a5ed1 ada.unchecked_deallocation%s
-D bitmap_store.ads	20150913222913 2f940e5f bitmap_store%s
-D bitmap_store.adb	20150913222944 d21442a1 bitmap_store%b
+D bitmap.ads		20150914020837 0e07e822 bitmap%s
+D bitmap.adb		20150914020551 7cfc20e9 bitmap%b
 D interfac.ads		20141120112812 6033a23f interfaces%s
 D i-cstrea.ads		20140801100435 e53d8b8e interfaces.c_streams%s
 D system.ads		20141031112219 1d274481 system%s
@@ -74,84 +74,82 @@ D s-unstyp.ads		20140731130224 9d58a4c0 system.unsigned_types%s
 D s-valuns.ads		20150220142606 10a8ed3b system.val_uns%s
 D s-wchcon.ads		20140718092328 1b7d22d2 system.wch_con%s
 X 1 ada.ads
-16K9*Ada 19e8 15|2r6 2r36 3r6 3r36 4r6 4r36 5r6 31r33
+16K9*Ada 19e8 15|3r6 3r36 4r6 4r36 5r6 5r36 6r6 29r33
 X 2 a-charac.ads
-16K13*Characters 18e19 15|4r10 4r40
+16K13*Characters 18e19 15|5r10 5r40
 X 3 a-chlat1.ads
-18K24*Latin_1 296e27 15|4w21 4r51
-35e4*LF{character} 16|69r51 70r65 71r52 83r47
+18K24*Latin_1 296e27 15|5w21 5r51
+35e4*LF{character} 16|76r51 77r65 78r52 90r47
 X 6 a-numeri.ads
-16K13*Numerics 32e17 15|5r10 31r37
+16K13*Numerics 32e17 15|6r10 29r37
 X 7 a-nudira.ads
-44k22*Discrete_Random 73e33 15|5w19 31r46
-48R9*Generator<27|63R9> 15|33r10[31]
-50V13*Random{integer} 16|25s45[15|31] 25s73[15|31] 25s101[15|31]
-53U14*Reset<27|100p14> 16|24s17[15|31]
+44k22*Discrete_Random 73e33 15|6w19 29r46
+48R9*Generator<27|63R9> 15|31r23[29]
+50V13*Random{integer} 16|26s45[15|29] 27s53[15|29] 28s57[15|29]
+53U14*Reset<27|100p14> 16|25s17[15|29]
 X 8 a-nudira.adb
-51V16 Random[27|83]{integer} 28|392b13[15|31]
+51V16 Random[27|83]{integer} 28|392b13[15|29]
 X 11 a-textio.ads
-49K13*Text_IO 471e16 15|2w10 2r40 3r10 3r40
-52P9*File_Type 16|65r29
-53n32*Out_File{53E9} 16|68r30
-86U14*Create 16|68s17
-98U14*Close 16|84s17
+49K13*Text_IO 471e16 15|3w10 3r40 4r10 4r40
+52P9*File_Type 16|71r29
+53n32*Out_File{53E9} 16|74r30
+86U14*Create 16|74s17
+98U14*Close 16|91s17
 X 12 a-titest.ads
-17K21*Text_Streams 23e29 15|3w18 3r48
+17K21*Text_Streams 23e29 15|4w18 4r48
 19P9*Stream_Access(9|39R9)
-21V13*Stream{19P9} 16|69s30 70s30 71s30 81s38 83s33
-X 15 bitmap_store.ads
-7K9*Bitmap_Store 49l5 49e17 16|2b14 86l5 86t17
-9M14*LUMINANCE 12r27 16|25r35 25r63 25r91
-11R14*PIXEL 13e19 15r39 17r69 23r27 27r27 28r27 41r93 43r92 47r40 16|19r40
-. 21r28 29r93 44r92 63r29
-12m17*R{9M14} 16|25m30 76r74
-12m20*G{9M14} 16|25m58 77r74
-12m23*B{9M14} 16|25m86 78r74
-15A14*COLORS(11R14)<integer>
-17A14*IMAGE(11R14)<integer><integer>
-19R14*IMAGE_REC 20r38 22c14 25e19 16|6r49 11r49
-20P14*PIXEL_POINTER(19R14) 24r27 35r23 36r27 37r27
-23r17*Color{11R14} 16|7m28 12m36 41r37 56m29
-24p17*Next{20P14} 16|13m36 38r50 53r50
-27r9*BLACK{11R14} 16|7r37 12r45
-28r9*WHITE{11R14}
-30I17*COLOR_RANGE{integer} 31r62
-31K13*Random_Color[7|44] 32r9
-33r5*CG{7|48R9[31]} 16|24r23 25r52 25r80 25r108
-35p9*First_Pixel{20P14} 16|8m17 36r31 51r31
-36p9*Last_Pixel{20P14} 16|9m17 13r25 14m25
-37p9*Temp_Pixel{20P14} 16|6m17 7r17 8r37 9r45 11m25 12r25 13r45 14r45 36m17
-. 38m25 38r39 41r26 51m17 53m25 53r39 56r18
-39U19*Generate_Image 39>34 16|4b19 16l13 16t27
-39i34 N{integer} 16|4b34 10r30
-41U19*Get_Pixel 41>29 41>49 41>65 41<81 16|29b19 42t12 75s33
-41i29 Width{integer} 16|29b29 35r32
-41i49 I{integer} 16|29b49 35r41
-41i65 J{integer} 16|29b65 35r46
-41r81 Color{11R14} 16|29b81 41m17
-43U19*Set_Pixel 43>29 43>49 43>65 43>81 16|44b19 57t12
-43i29 Width{integer} 16|44b29 50r32
-43i49 I{integer} 16|44b49 50r41
-43i65 J{integer} 16|44b65 50r46
-43r81 Color{11R14} 16|44b81 56r38
-45U19*Export_PPM 45>30 45>51 16|59b19 85l13 85t23
-45i30 Height{integer} 16|59b30 61r85 72r30
-45i51 Width{integer} 16|59b51 61r62 62r39 74r38 75r43
-47V18*Generate_Pixel{11R14} 16|19b18 27t12
-X 16 bitmap_store.adb
-10i21 I{integer}
-21r17 My_Pixel{15|11R14} 25m17 26r24
-31i17 Position{integer} 35m17 37r34
-32i17 Counter{integer} 37r23 39m25 39r39
-46i17 Position{integer} 50m17 52r34
-47i17 Counter{integer} 52r23 54m25 54r39
-61a17 SIZE=61:69{string} 70r44 70r52
-62a17 Buffer{string} 73r34 76m33 77m33 78m33 81r52
-63r17 Color{15|11R14} 75m56 76r68 77r68 78r68
-64i17 Index{positive} 73m25 76r40 77r40 78r40 79m33 79r42
-65p17 File{11|52P9} 68m24 68r24 69r37 70r37 71r37 81r45 83r40 84m23 84r23
-72i21 I{integer} 75r50
-74i29 J{integer} 75r53
+21V13*Stream{19P9} 16|76s30 77s30 78s30 88s38 90s33
+X 15 bitmap.ads
+8K9*Bitmap 44l5 44e11 16|2b14 93l5 93t11
+10M14*LUMINANCE 13r27 16|26r35 27r43 28r47
+12R14*PIXEL 14e19 21r27 26r27 27r27 39r93 40r92 42r40 16|20r40 22r28 33r93
+. 49r92 69r29
+13m17*R{10M14} 16|26m30 83r74
+13m20*G{10M14} 16|27m38 84r74
+13m23*B{10M14} 16|28m42 85r74
+16R14*PIXEL_RECORD 17r38 20c14 23e19 16|7r49 12r49
+17P14*PIXEL_POINTER(16R14) 22r27 34r23 35r27 36r27
+21r17*Color{12R14} 16|8m28 13m36 45r37 61m29
+22p17*Next{17P14} 16|14m36 42r50 58r50
+26r9*BLACK{12R14} 16|8r37 13r45
+27r9*WHITE{12R14}
+28I17*COLOR_RANGE{integer} 29r62
+29K13*Random_Color[7|44] 30r9
+31r5*Color_Generator{7|48R9[29]} 16|25r23 26r52 27r60 28r64
+34p9*First_Pixel{17P14} 16|9m17 40r31 56r31
+35p9*Last_Pixel{17P14} 16|10m17 14r25 15m25
+36p9*Temp_Pixel{17P14} 16|7m17 8r17 9r37 10r45 12m25 13r25 14r45 15r45 40m17
+. 42m25 42r39 45r26 56m17 58m25 58r39 61r18
+38U19*Generate_Image 38>34 16|5b19 17l13 17t27
+38i34 Size{integer} 16|5b34 11r30
+39U19*Get_Pixel 39>29 39>49 39>65 39<81 16|33b19 46t12 82s33
+39i29 Width{integer} 16|33b29 39r32
+39i49 I{integer} 16|33b49 39r41
+39i65 J{integer} 16|33b65 39r46
+39r81 Color{12R14} 16|33b81 45m17
+40U19*Set_Pixel 40>29 40>49 40>65 40>81 16|49b19 62t12
+40i29 Width{integer} 16|49b29 55r32
+40i49 I{integer} 16|49b49 55r41
+40i65 J{integer} 16|49b65 55r46
+40r81 Color{12R14} 16|49b81 61r38
+41U19*Export_PPM 41>30 41>51 16|65b19 92l13 92t23
+41i30 Height{integer} 16|65b30 67r85 79r30
+41i51 Width{integer} 16|65b51 67r62 68r39 81r38 82r43
+42V18*Generate_Pixel{12R14} 16|20b18 30t12
+X 16 bitmap.adb
+11i21 I{integer}
+22r17 My_Pixel{15|12R14} 26m17 29r24
+35i17 Position{integer} 39m17 41r34
+36i17 Counter{integer} 41r23 43m25 43r39
+51i17 Position{integer} 55m17 57r34
+52i17 Counter{integer} 57r23 59m25 59r39
+67a17 SIZE=67:69{string} 77r44 77r52
+68a17 Buffer{string} 80r34 83m33 84m33 85m33 88r52
+69r17 Color{15|12R14} 82m56 83r68 84r68 85r68
+70i17 Index{positive} 80m25 83r40 84r40 85r40 86m33 86r42
+71p17 File{11|52P9} 74m24 74r24 76r37 77r37 78r37 88r45 90r40 91m23 91r23
+79i21 I{integer} 82r50
+81i29 J{integer} 82r53
 X 17 interfac.ads
 68M9*Unsigned_32
 71M9*Unsigned_64
