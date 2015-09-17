@@ -1,20 +1,15 @@
 
 package body Bitmap is
 	
-	-- Generate an image 2 X 2T pixels like a linked list.
-	procedure Generate_Image(Size : in INTEGER) is	
+	-- Fills an image 2 X 2T with an specific pixel.
+	procedure Fill(Picture : in out Image; Color : Pixel) is
 	begin
-		Temp_Pixel 		 := new PIXEL_RECORD;
-		Temp_Pixel.Color := BLACK;					-- Black is the default color.
-		First_Pixel 	 := Temp_Pixel;
-		Last_Pixel 	 	 := Temp_Pixel;
-		for I in 1..(Size - 1) loop
-			Temp_Pixel       := new PIXEL_RECORD;
-			Temp_Pixel.Color := BLACK;
-			Last_Pixel.Next  := Temp_Pixel;
-			Last_Pixel       := Temp_Pixel;
-		end loop;	
-	end Generate_Image;	
+	    for I in Picture'Range (1) loop
+	        for J in Picture'Range (2) loop
+	        	Picture (I, J) := Color;
+	    	end loop;
+	  	end loop;
+	end Fill;	
 
 	-- Generate a random pixel color.
 	function Generate_Pixel return PIXEL is
@@ -29,42 +24,10 @@ package body Bitmap is
 		return My_Pixel;		
 	end;	
 
-	-- Get a specific pixel in the linked list image.	
-	procedure Get_Pixel(Width : in INTEGER; I : in INTEGER; J : in INTEGER; Color : out PIXEL) is
-	
-		Position : INTEGER;
-		Counter  : INTEGER := 0;
-	
-	begin
-		Position   := (Width  * I) + J;		-- Calculating the specific position.
-		Temp_Pixel := First_Pixel;
-		while Counter /= Position loop		-- Looking for the position.	
-			Temp_Pixel := Temp_Pixel.Next;
-			Counter    := Counter + 1;
-		end loop;		
-		Color := Temp_Pixel.Color;
-	end;
-	
-	-- Set a specific pixel in the linked list image.		
-	procedure Set_Pixel(Width : in INTEGER; I : in INTEGER; J : in INTEGER; Color : in PIXEL) is
-
-		Position : INTEGER;
-		Counter  : INTEGER := 0;
-	
-	begin
-		Position   := (Width  * I) + J;		-- Calculating the specific position.
-		Temp_Pixel := First_Pixel;
-		while Counter /= Position loop		-- Looking for the position.			
-			Temp_Pixel := Temp_Pixel.Next;
-			Counter    := Counter + 1;
-		end loop;		
-		 Temp_Pixel.Color := Color;
-	end;	
- 
  	-- Export the linked list "image" to a Portable Pixel Map (.ppm) image.
-	procedure Export_PPM(Height : in INTEGER; Width : in INTEGER) is
+	procedure Export_PPM(Height : in INTEGER; Width : in INTEGER; My_Image : in IMAGE) is
 
-		SIZE   	  : constant STRING := Integer'IMAGE(Width) & Integer'IMAGE(Height);
+		SIZE   	  : constant STRING := Integer'IMAGE(My_Image'LENGTH(2)) & Integer'IMAGE(My_Image'LENGTH(1));		
 		Buffer 	  : STRING(1..Width * 3);	-- Buffer to each line: RGB pixels.
 		Color  	  : PIXEL;
 		Index  	  : POSITIVE;
@@ -76,10 +39,10 @@ package body Bitmap is
 		STRING'Write(Stream(File), "P6" & LF);
 		STRING'Write(Stream(File), SIZE(2..SIZE'LAST) & LF);
 		STRING'Write(Stream(File), "255" & LF);
-		for I in 0..(Height - 1) loop 				-- Image height.
+		for I in My_Image'RANGE (1)  loop 			-- Image height.
 			Index := Buffer'FIRST;
-			for J in 0..(Width - 1) loop 			-- Image width.
-				Get_Pixel(Width, I, J, Color);		-- Get the pixel in the specific position.
+			for J in My_Image'RANGE (2) loop 		-- Image width.
+				Color := My_Image(I, J);			-- Get the pixel in the specific position.
 				Buffer(Index)     := CHARACTER'Val(Color.R);	-- Red value.
 				Buffer(Index + 1) := CHARACTER'Val(Color.G);	-- Green value.
 				Buffer(Index + 2) := CHARACTER'Val(Color.B);	-- Blue value.

@@ -13,8 +13,7 @@ procedure Cellular_Automaton is
     -- Procedure and functions declaration.
     function Pattern_Result return MY_BIT;
     procedure Set_Configuration; 
-    procedure Initialize_Sequence(N : in INTEGER); 
-    procedure Update_Sequence(I : in INTEGER; Image_Width : in INTEGER; Color : in PIXEL); 
+    procedure Update_Sequence(I : in INTEGER; Image_Width : in INTEGER; Color : in PIXEL; My_Image : in out IMAGE); 
 
     -- Variables declaration
     T             : INTEGER;        -- Time T which defines the amount of states and the bitmap dimensions.
@@ -32,17 +31,13 @@ procedure Cellular_Automaton is
     First_Pattern : PATTERN_POINTER;
     Last_Pattern  : PATTERN_POINTER;
     Temp_Pattern  : PATTERN_POINTER;
-    -- Sequence Automatas.
-    First_Automata : AUTOMATA_POINTER;
-    Last_Automata  : AUTOMATA_POINTER;
-    Temp_Automata  : AUTOMATA_POINTER;
 
     -- Create the specific pattern's configuration.
     procedure Set_Configuration is
     begin       
         N_To_Byte(N, N_Byte);                           -- Decimal N to Byte.
         for Pattern_Num in 0..7 loop                    -- From 000 to 111.
-            Temp_Pattern := new PATTERN_RECORD;            -- New Pattern - Configuration. 
+            Temp_Pattern := new PATTERN_RECORD;         -- New Pattern - Configuration. 
             N_to_Triad(Pattern_Num, N_Triad);           -- Decimal to Binary (Triad).
             Temp_Pattern.Triad := N_Triad;              -- Setting the triad.
             Temp_Pattern.Bit := N_Byte(Pattern_Num);  
@@ -56,61 +51,41 @@ procedure Cellular_Automaton is
         end loop;         
     end Set_Configuration;      
 
-    -- Initializate the N Automatas sequence, from i = 0..(N - 1).
-    procedure Initialize_Sequence(N : in INTEGER) is        
-    begin
-        for I in 0..(N - 1)  loop                       -- Setting the required Automatas.
-            Temp_Automata := New AUTOMATA_RECORD;
-            if I = (N - 1) / 2 then                     -- Bit on.
-                Temp_Automata.Bit := 1;
-                Set_Pixel(Image_Width, 0, I, WHITE);    -- Image drawing.
-            else
-                Temp_Automata.Bit := 0;
-            end if;
-
-            if First_Automata = null then                    
-                First_Automata := Temp_Automata;
-                Last_Automata := Temp_Automata;
-            else                                        -- Previous and Next automata declarations.
-                Last_Automata.Next := Temp_Automata;
-                Temp_Automata.Previous := Last_Automata;
-                Last_Automata := Temp_Automata;    
-            end if;
-        end loop;        
-    end Initialize_Sequence;
-
     -- Develope the state of the Automatas according to the Configuration.
-    procedure Update_Sequence(I : in INTEGER; Image_Width : in INTEGER; Color : in PIXEL) is
-
-        Stored_Bit : MY_BIT;							-- Backup bit.
-
+    procedure Update_Sequence(I : in INTEGER; Image_Width : in INTEGER; Color : in PIXEL; My_Image : in out IMAGE) is
     begin
-        Temp_Automata := First_Automata;
-        Stored_Bit := Temp_Automata.Bit;
         for J in 0..(Image_Width - 1)  loop             -- Evaluating Ai-1, Ai, Ai+1. i = 0..(2T - 1).
 														-- Special cases: First and Last automata.
-            if Temp_Automata.Previous = null or Temp_Automata.Next = null then
+            if J = 0 or J = (Image_Width - 1) then
                 if First_Pattern.Bit = 1 and Last_Pattern.Bit = 0 then
-                    Temp_Automata.Bit := not Temp_Automata.Bit;
+                    if My_Image(I, J) = BLACK then
+                        My_Image(I + 1, J) := Color;
+                    end if;
                 end if;  
                 if Last_Pattern.Bit = 1 then
-                    if First_Pattern.Bit = 0 then
-                        Temp_Automata.Bit := 0;    
-                    else       
-                        Temp_Automata.Bit := 1; 
+                    if First_Pattern.Bit /= 0 then   
+                        My_Image(I + 1, J) := Color;
                     end if;
-                end if;                          
+                end if;            
             else                                        -- Common cases.
-                N_Triad(2) := Stored_Bit;				-- Setting the triad.
-                N_Triad(1) := Temp_Automata.Bit;
-                N_Triad(0) := Temp_Automata.Next.Bit;
-                Stored_Bit := Temp_Automata.Bit;
-                Temp_Automata.Bit := Pattern_Result;	-- Getting the bit result.
+                N_Triad(2) := 0;				        -- Setting the triad.
+                N_Triad(1) := 0;
+                N_Triad(0) := 0;
+
+                if My_Image(I, J - 1) /= BLACK then
+                    N_Triad(2) := 1;                                    
+                end if;
+                if My_Image(I, J) /= BLACK then
+                    N_Triad(1) := 1;                    
+                end if;
+                if My_Image(I, J + 1) /= BLACK then
+                    N_Triad(0) := 1;                    
+                end if;
+
+                if Pattern_Result = 1 then
+                    My_Image(I + 1, J) := Color;
+                end if;
             end if;			
-			if Temp_Automata.Bit = 1 then
-				Set_Pixel(Image_Width, I, J, Color);	-- Image drawing.	
-			end if;			
-            Temp_Automata := Temp_Automata.Next;
         end loop;        
     end Update_Sequence;
 
@@ -140,21 +115,24 @@ begin
    
     Image_Height := T;
     Image_Width := 2 * T;
-    Generate_Image(Image_Height * Image_Width);     
-    Initialize_Sequence(Image_Width);  
-    Set_Configuration;  
     Color := Generate_Pixel;
-Main_Loop:
-    for I in 1..(Image_Height - 1) loop
-        if I + 1 = Image_Height then
-            Update_Sequence(I, Image_Width, Color); 
-            Export_PPM(Image_Height, Image_Width);
-            Put_Line("PPM generated successfully.");
-            exit Main_Loop;
-        else
-            Update_Sequence(I, Image_Width, Color); 
-        end if;
-    end loop Main_Loop;
+    Set_Configuration;      
+    declare
+        My_Image : Image(0..(Image_Height - 1), 0..(Image_Width - 1));
+    begin
+        Fill(My_Image, (0, 0, 0));
+        My_Image(0, (Image_Width - 1) / 2) := WHITE;
+    Main_Loop:
+        for I in 0..(Image_Height - 1) loop
+            if I + 1 = Image_Height then
+                Export_PPM(Image_Height, Image_Width, My_Image);
+                Put_Line("PPM generated successfully.");
+                exit Main_Loop;
+            else
+                Update_Sequence(I, Image_Width, Color, My_Image); 
+            end if;
+        end loop Main_Loop;
+    end;    
 
 exception
     when Data_Error => Put_Line("Data Entry - Error");

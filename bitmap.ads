@@ -12,15 +12,6 @@ package Bitmap is
 	type PIXEL is record
 		R, G, B : LUMINANCE;			-- RGB Colors.
 	end record;
-	
-	type PIXEL_RECORD;
-	type PIXEL_POINTER is access PIXEL_RECORD;
-	
-	-- Linked pixels records.										
-	type PIXEL_RECORD is record
-		Color 	: PIXEL;
-		Next 	: PIXEL_POINTER;
-	end record;
 
 	-- Colors declarations.
 	BLACK  : constant PIXEL := (others => 0);
@@ -29,16 +20,11 @@ package Bitmap is
     package Random_Color is new Ada.Numerics.Discrete_Random(COLOR_RANGE);
     use Random_Color;
     Color_Generator : GENERATOR;
-	
-	-- Pointers declaration.
-	First_Pixel : PIXEL_POINTER;
-	Last_Pixel 	: PIXEL_POINTER;
-	Temp_Pixel 	: PIXEL_POINTER;
 
-	procedure Generate_Image(Size : in INTEGER);
-	procedure Get_Pixel(Width : in INTEGER; I : in INTEGER; J : in INTEGER; Color : out PIXEL);	
-	procedure Set_Pixel(Width : in INTEGER; I : in INTEGER; J : in INTEGER; Color : in PIXEL);	
-	procedure Export_PPM(Height : in INTEGER; Width : in INTEGER);	
+    type IMAGE is array(NATURAL range <>, NATURAL range <>) of PIXEL;
+
+	procedure Fill(Picture : in out Image; Color : Pixel);
+	procedure Export_PPM(Height : in INTEGER; Width : in INTEGER; My_Image : in IMAGE);	
 	function Generate_Pixel return PIXEL;
 
 end Bitmap;
