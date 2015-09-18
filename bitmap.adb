@@ -24,7 +24,7 @@ package body Bitmap is
 		return My_Pixel;		
 	end;	
 
- 	-- Export the linked list "image" to a Portable Pixel Map (.ppm) image.
+ 	-- Export the "image" to a Portable Pixel Map (.ppm) image.
 	procedure Export_PPM(Height : in INTEGER; Width : in INTEGER; My_Image : in IMAGE) is
 
 		SIZE   	  : constant STRING := Integer'IMAGE(My_Image'LENGTH(2)) & Integer'IMAGE(My_Image'LENGTH(1));		

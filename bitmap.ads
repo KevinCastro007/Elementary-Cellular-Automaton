@@ -13,6 +13,8 @@ package Bitmap is
 		R, G, B : LUMINANCE;			-- RGB Colors.
 	end record;
 
+    type IMAGE is array(NATURAL range <>, NATURAL range <>) of PIXEL;
+
 	-- Colors declarations.
 	BLACK  : constant PIXEL := (others => 0);
 	WHITE  : constant PIXEL := (others => 255);	
@@ -20,8 +22,6 @@ package Bitmap is
     package Random_Color is new Ada.Numerics.Discrete_Random(COLOR_RANGE);
     use Random_Color;
     Color_Generator : GENERATOR;
-
-    type IMAGE is array(NATURAL range <>, NATURAL range <>) of PIXEL;
 
 	procedure Fill(Picture : in out Image; Color : Pixel);
 	procedure Export_PPM(Height : in INTEGER; Width : in INTEGER; My_Image : in IMAGE);	
