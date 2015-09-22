@@ -82,7 +82,7 @@ procedure Cellular_Automaton is
                     N_Triad(0) := 1;                    
                 end if;
 
-                if Pattern_Result = 1 then
+                if Pattern_Result = 1 then              -- Image change.
                     My_Image(I + 1, J) := Color;
                 end if;
             end if;			
@@ -113,17 +113,18 @@ begin
         goto Get_N;
     end if; 
    
-    Image_Height := T;
+    Image_Height := T;                              -- Setting the image dimensions.
     Image_Width := 2 * T;
-    Color := Generate_Pixel;
-    Set_Configuration;      
-    declare
+    Color := Generate_Pixel;                        -- Random color.
+    Set_Configuration;                              -- Setting the configuration, with the number N.
+
+    declare                                         -- Image declaration.
         My_Image : Image(0..(Image_Height - 1), 0..(Image_Width - 1));
     begin
-        Fill(My_Image, (0, 0, 0));
+        Fill(My_Image, (0, 0, 0));                  -- Default image.
         My_Image(0, (Image_Width - 1) / 2) := WHITE;
     Main_Loop:
-        for I in 0..(Image_Height - 1) loop
+        for I in 0..(Image_Height - 1) loop         -- Proccesing the times t from T.
             if I + 1 = Image_Height then
                 Export_PPM(Image_Height, Image_Width, My_Image);
                 Put_Line("PPM generated successfully.");
